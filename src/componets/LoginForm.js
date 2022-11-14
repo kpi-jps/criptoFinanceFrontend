@@ -22,7 +22,12 @@ const LoginForm = (props) => {
                 return
             }
             console.log(response)
-            props.setUserInfo({userId: response.data.userId, userName: response.data.userName});
+            props.setUserInfo(
+                {   userId: response.data.userId, 
+                    userName: response.data.userName, 
+                    userEmail : response.data.userEmail
+                }
+            );
             props.setLayoutMethods.setDashboardLayout();
         });
     }

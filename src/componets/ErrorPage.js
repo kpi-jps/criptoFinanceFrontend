@@ -1,4 +1,4 @@
-const ErrorPage = () => {
+const ErrorPage = (props) => {
 
     return (
         <div>Error Page</div>

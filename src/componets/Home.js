@@ -6,7 +6,7 @@ const Home = (props) => {
             {
                 props.criptoRegisters.length === 0 ? <p> Não há registros de criptoatvos</p> :
                 props.criptoRegisters.map((item, index) => {
-                    return <li key={index}>{item.id}</li>
+                    return <p key={index}>{item.id}</p>
                 })}
         </div>
     )
