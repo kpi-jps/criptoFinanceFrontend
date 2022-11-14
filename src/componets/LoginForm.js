@@ -10,7 +10,7 @@ const LoginForm = (props) => {
         fetchData('/user/login', 'POST', {email : email, passwd : passwd})
         .then((response) => {
             if(response.error) {
-                props.setErrorLayout();
+                props.methods.setErrorLayout();
                 return;
             }
             if(response.status === 500) {
@@ -21,14 +21,14 @@ const LoginForm = (props) => {
                 alert(response.data.msg);
                 return
             }
-            console.log(response)
-            props.setUserInfo(
+            //console.log(response)
+            props.methods.setUserInfo(
                 {   userId: response.data.userId, 
                     userName: response.data.userName, 
                     userEmail : response.data.userEmail
                 }
             );
-            props.setLayoutMethods.setDashboardLayout();
+            props.methods.setDashboardLayout();
         });
     }
 
@@ -43,7 +43,7 @@ const LoginForm = (props) => {
                     <input type="password" name="passwd" value={passwd} onChange={e => setPasswd(e.target.value)}/>
                 </label>
                 <input type="submit" value="Entrar"/>
-                <div> Não tem cadastro? <span onClick={e => props.setLayoutMethods.setRegisterLayout()}>crie</span> uma conta</div>
+                <div> Não tem cadastro? <span onClick={e => props.methods.setRegisterLayout()}>crie</span> uma conta</div>
             </form>
     )
 }

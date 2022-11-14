@@ -32,7 +32,7 @@ function App() {
     setLayout({ loginLayout: false, registerLayout: false, errorLayout: false });
   }
 
-  const setLayoutMethods = { setLoginLayout, setRegisterLayout, setErrorLayout, setDashboardLayout }
+  
   useEffect(() => {
     fetchData('/user', 'POST', {})
       .then((response) => {
@@ -44,7 +44,7 @@ function App() {
           setErrorLayout();
           return;
         }
-        //console.log(response.data);
+        console.log(response.data);
         setDashboardLayout();
         setUserInfo(response.data);
       });
@@ -55,9 +55,9 @@ function App() {
 
 
   if (layout.errorLayout) return <main><ErrorPage /></main>
-  if (layout.loginLayout) return <main> <LoginForm setLayoutMethods={setLayoutMethods} setUserInfo={setUserInfo} /> </main>
-  if (layout.registerLayout) return <main> <RegisterForm setLayoutMethods={setLayoutMethods} /> </main>
-  return <main> <Dashboard userInfo={userInfo} setUserInfo={setUserInfo} setLayoutMethods={setLayoutMethods} /> </main>
+  if (layout.loginLayout) return <main> <LoginForm methods={{setRegisterLayout, setErrorLayout, setDashboardLayout, setUserInfo}} /> </main>
+  if (layout.registerLayout) return <main> <RegisterForm methods={{setErrorLayout, setLoginLayout}} /> </main>
+  return <main> <Dashboard userInfo={userInfo} methods={{setErrorLayout, setLoginLayout}} /> </main>
 
 }
 

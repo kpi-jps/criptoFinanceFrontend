@@ -7,7 +7,7 @@ import ErroPage from './ErrorPage.js'
 import Home from './Home.js'
 
 const Dashboard = (props) => {
-    const id = props.userInfo.userId;
+    const userId = props.userInfo.userId;
     const email = props.userInfo.userEmail;
     const [name, setName] = useState(props.userInfo.userName);
     const [dashboadLayout, setDashboardLayout] = useState(
@@ -65,7 +65,7 @@ const Dashboard = (props) => {
         );
     }
 
-    const erroLayout = () => {
+    const errorLayout = () => {
         setDashboardLayout(
             {
                 editNameLayout: false,
@@ -77,19 +77,19 @@ const Dashboard = (props) => {
     }
 
     const getCriptoRegister = async () => {
-        const registerList = await fetchData(`/crypto/getAll/${id}`, 'GET', {});
+        const registerList = await fetchData(`/crypto/getAll/${userId}`, 'GET', {});
     }
 
     useEffect(() => {
-        fetchData(`/crypto/getAll/${id}`, 'GET', {}).then(
-            result => {
-                console.log(result);
-                if(result.error) {
-                    erroLayout();
+        fetchData(`/crypto/getAll/${userId}`, 'GET', {}).then(
+            response => {
+                //console.log(response);
+                if(response.error) {
+                    errorLayout();
                     return;
                 }
-                setCriptoRegisters(result.data);
-                //console.log(criptoRegisters);
+                setCriptoRegisters(response.data);
+                console.log(criptoRegisters);
             }
         )
 
@@ -101,13 +101,13 @@ const Dashboard = (props) => {
         fetchData('/user/logout', 'GET', {})
             .then((response) => {
                 console.log(response);
-                props.setLayoutMethods.setLoginLayout();
+                props.methods.setLoginLayout();
             });
     }
     return (
         dashboadLayout.errorLayout ? <ErroPage content={'content'} /> :
             <div>
-                <div id="header"> Usuário #{id} Email : {email} - Nome: {name}</div>
+                <div id="header"> Usuário #{userId} Email : {email} - Nome: {name}</div>
                 <ul id="ctrls">
                     <li onClick={e => homeLayout()}>Home</li>
                     <li onClick={e => editNameLayout()}>Editar nome do usuário</li>
@@ -116,9 +116,9 @@ const Dashboard = (props) => {
                     <li onClick={e => logout()}>Sair</li>
                 </ul>
 
-                {dashboadLayout.editNameLayout && <UpdateNameForm name={name} email={email} methods={{ homeLayout, setName, erroLayout }} />}
-                {dashboadLayout.editPasswdLayout && <UpdatePasswdForm methods={{ homeLayout }} />}
-                {dashboadLayout.addCriptoRegisterLayout && <AddCriptoRegisterForm methods={{ homeLayout, setCriptoRegisters }} />}
+                {dashboadLayout.editNameLayout && <UpdateNameForm name={name} email={email} methods={{ homeLayout, setName, errorLayout }} />}
+                {dashboadLayout.editPasswdLayout && <UpdatePasswdForm  email={email} methods={{ homeLayout, errorLayout }} />}
+                {dashboadLayout.addCriptoRegisterLayout && <AddCriptoRegisterForm userid = {userId} methods={{ homeLayout, setCriptoRegisters, errorLayout }} />}
                 {!dashboadLayout.editNameLayout &&
                     !dashboadLayout.editPasswdLayout &&
                     !dashboadLayout.addCriptoRegisterLayout &&

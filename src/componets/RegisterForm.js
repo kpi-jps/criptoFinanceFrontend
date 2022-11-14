@@ -12,14 +12,25 @@ const RegisterForm = (props) => {
         event.preventDefault();
         if (passwd !== confirmPasswd) {
             alert(DIFF_PASS_MSG);
+            return;
         }
         fetchData('/user/create', 'POST', { name, email, passwd })
             .then((response) => {
                 if(response.error) {
-                    
+                    props.methods.setErrorLayout();
+                    return;
                 }
-                console.log(response);
-                props.setLayoutMethods.setLoginLayout()
+                if(response.status === 500) {
+                    alert(response.data.msg);
+                    return;
+                }
+                if(response.status === 401) {
+                    alert(response.data.msg);
+                    return
+                }
+                //console.log(response);
+                alert(response.data.msg)
+                props.methods.setLoginLayout()
 
             });
     }
@@ -43,7 +54,7 @@ const RegisterForm = (props) => {
                 <input type="password" name="confirPasswd" value={confirmPasswd} onChange={e => setConfirmPasswd(e.target.value)} />
             </label>
             <input type="submit" value="Registrar" />
-            <div> <span onClick={e => props.setLayoutMethods.setLoginLayout()}> Ir </span> para tela de login</div>
+            <div> <span onClick={e => props.methods.setLoginLayout()}> Ir </span> para tela de login</div>
         </form>
     )
 }
