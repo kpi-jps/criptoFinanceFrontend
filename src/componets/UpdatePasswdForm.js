@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { DIFF_PASS_MSG } from '../utils/constants';
 import { fetchData } from '../utils/utils'
 
 
@@ -10,7 +9,7 @@ const UpdatePasswdForm = (props) => {
     const updatePasswd = (event) => {
         event.preventDefault();
         if (newPasswd !== confirmPasswd) {
-            alert(DIFF_PASS_MSG);
+            alert('Senha e confirmação de senha são diferentes!');
             return;
         }
         fetchData(`/user/update-passwd`, 'PUT', { email: props.email, newPasswd: newPasswd }).then(

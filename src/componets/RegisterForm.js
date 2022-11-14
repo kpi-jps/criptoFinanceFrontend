@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { fetchData } from '../utils/utils';
-import { DIFF_PASS_MSG } from '../utils/constants';
+
 
 const RegisterForm = (props) => {
     const [name, setName] = useState('');
@@ -11,7 +11,7 @@ const RegisterForm = (props) => {
     const register = (event) => {
         event.preventDefault();
         if (passwd !== confirmPasswd) {
-            alert(DIFF_PASS_MSG);
+            alert('Senha e confirmação de senha são diferentes!');
             return;
         }
         fetchData('/user/create', 'POST', { name, email, passwd })

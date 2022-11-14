@@ -16,7 +16,7 @@ const AddCriptoRegisterForm = (props) => {
     const findTicker = (event) => {
         event.preventDefault();
         if(ticker === '') {
-            alert('Ticker vazio!');
+            alert('Ticker não pode ser vazio!');
             return;
         }
         fetchData(`/crypto/search/${ticker}`, 'GET', {}).then(
@@ -35,7 +35,7 @@ const AddCriptoRegisterForm = (props) => {
     const save = (event) => {
         event.preventDefault();
         if(quantity === 0) {
-            alert('Quantidade igual a zero!');
+            alert('Quantidade não pode ser zero!');
             return;
         }
         if(isNaN(Number(quantity))) {
@@ -56,7 +56,7 @@ const AddCriptoRegisterForm = (props) => {
                     return
                 }
                 
-                alert ('Cripto adicionado com sucesso!')
+                alert ('Cripto registro adicionado com sucesso!')
                 
             }
         );

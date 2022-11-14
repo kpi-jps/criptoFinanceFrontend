@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { fetchData } from '../utils/utils.js'
-import UpdateNameForm from './UpdateNameForm.js'
-import UpdatePasswdForm from './UpdatePasswdForm.js'
-import AddCriptoRegisterForm from './AddCriptoRegisterForm.js'
+import { fetchData } from '../utils/utils'
+
+import UpdateNameForm from './UpdateNameForm'
+import UpdatePasswdForm from './UpdatePasswdForm'
+import AddCriptoRegisterForm from './AddCriptoRegisterForm'
 import ErroPage from './ErrorPage.js'
 import Home from './Home.js'
 

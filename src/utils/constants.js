@@ -5,7 +5,8 @@
 const BASE_URL = 'http://backend.localhost:5555'; 
 const ORIGIN = 'http://localhost:3000/';
 
-//msgs
 
-const DIFF_PASS_MSG = 'Senha e confirmação de senha são diferentes!'
-export { BASE_URL, ORIGIN, DIFF_PASS_MSG}
+
+
+
+export { BASE_URL, ORIGIN }
