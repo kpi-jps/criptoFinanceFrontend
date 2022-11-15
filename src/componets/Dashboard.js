@@ -77,23 +77,49 @@ const Dashboard = (props) => {
         );
     }
 
-    const getCriptoRegister = async () => {
-        const registerList = await fetchData(`/crypto/getAll/${userId}`, 'GET', {});
-    }
-
-    useEffect(() => {
+    const updateCriptoRegisterList = () => {
         fetchData(`/crypto/getAll/${userId}`, 'GET', {}).then(
             response => {
                 //console.log(response);
-                if(response.error) {
+                if (response.error) {
                     errorLayout();
                     return;
                 }
+                if (response.status === 500) {
+                    alert(response.data.msg);
+                    return;
+                }
+                if (response.status === 401) {
+                    alert(response.data.msg);
+                    return
+                }
                 setCriptoRegisters(response.data);
-                console.log(criptoRegisters);
+
             }
         )
+    }
 
+    const getValues = () => {
+
+        const list = criptoRegisters.map(item => {
+            console.log(item)
+            fetchData(`/crypto/search/${item.ticker}`, 'GET', {}).then(
+                response => {
+                    item.btcValue = response.data.data.market_data.price_btc;
+                    item.usdValue = response.data.data.market_data.price_usd;
+                    console.log(response)
+                }
+            );
+        })
+        console.log(list);
+
+
+
+    }
+
+    useEffect(() => { 
+        updateCriptoRegisterList() ;
+        getValues();
     }, []);
 
 
@@ -118,8 +144,8 @@ const Dashboard = (props) => {
                 </ul>
 
                 {dashboadLayout.editNameLayout && <UpdateNameForm name={name} email={email} methods={{ homeLayout, setName, errorLayout }} />}
-                {dashboadLayout.editPasswdLayout && <UpdatePasswdForm  email={email} methods={{ homeLayout, errorLayout }} />}
-                {dashboadLayout.addCriptoRegisterLayout && <AddCriptoRegisterForm userid = {userId} methods={{ homeLayout, setCriptoRegisters, errorLayout }} />}
+                {dashboadLayout.editPasswdLayout && <UpdatePasswdForm email={email} methods={{ homeLayout, errorLayout }} />}
+                {dashboadLayout.addCriptoRegisterLayout && <AddCriptoRegisterForm userId={userId} methods={{ homeLayout, updateCriptoRegisterList, errorLayout }} />}
                 {!dashboadLayout.editNameLayout &&
                     !dashboadLayout.editPasswdLayout &&
                     !dashboadLayout.addCriptoRegisterLayout &&
