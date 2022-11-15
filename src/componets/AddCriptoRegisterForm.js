@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { fetchData } from '../utils/utils'
 
 const AddCriptoRegisterForm = (props) => {

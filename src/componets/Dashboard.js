@@ -99,27 +99,8 @@ const Dashboard = (props) => {
         )
     }
 
-    const getValues = () => {
-
-        const list = criptoRegisters.map(item => {
-            console.log(item)
-            fetchData(`/crypto/search/${item.ticker}`, 'GET', {}).then(
-                response => {
-                    item.btcValue = response.data.data.market_data.price_btc;
-                    item.usdValue = response.data.data.market_data.price_usd;
-                    console.log(response)
-                }
-            );
-        })
-        console.log(list);
-
-
-
-    }
-
     useEffect(() => { 
         updateCriptoRegisterList() ;
-        getValues();
     }, []);
 
 
@@ -149,7 +130,7 @@ const Dashboard = (props) => {
                 {!dashboadLayout.editNameLayout &&
                     !dashboadLayout.editPasswdLayout &&
                     !dashboadLayout.addCriptoRegisterLayout &&
-                    <Home criptoRegisters={criptoRegisters} />
+                    <Home userId={userId} criptoRegisters={criptoRegisters} methods={{ updateCriptoRegisterList, errorLayout }}/>
                 }
 
             </div>
