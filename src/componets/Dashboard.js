@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchData } from '../utils/utils'
-
+import DashboardHeader from "./DashboarHeader";
 import UpdateNameForm from './UpdateNameForm'
 import UpdatePasswdForm from './UpdatePasswdForm'
 import AddCriptoRegisterForm from './AddCriptoRegisterForm'
@@ -114,26 +114,29 @@ const Dashboard = (props) => {
     }
     return (
         dashboadLayout.errorLayout ? <ErroPage content={'content'} /> :
-            <div>
-                <div id="header"> Usuário #{userId} Email : {email} - Nome: {name}</div>
-                <ul id="ctrls">
-                    <li onClick={e => homeLayout()}>Home</li>
-                    <li onClick={e => editNameLayout()}>Editar nome do usuário</li>
-                    <li onClick={e => editPasswdLayout()}>Editar senha do usuário </li>
-                    <li onClick={e => addCriptoRegisterLayout()}>Adicionar cripto registro</li>
-                    <li onClick={e => logout()}>Sair</li>
-                </ul>
+            <>
+                <DashboardHeader/>
+                <div className="dashboard-container">
+                    <div id="header"> Usuário #{userId} Email : {email} - Nome: {name}</div>
+                    <ul id="ctrls">
+                        <li onClick={e => homeLayout()}>Home</li>
+                        <li onClick={e => editNameLayout()}>Editar nome do usuário</li>
+                        <li onClick={e => editPasswdLayout()}>Editar senha do usuário </li>
+                        <li onClick={e => addCriptoRegisterLayout()}>Adicionar cripto registro</li>
+                        <li onClick={e => logout()}>Sair</li>
+                    </ul>
 
-                {dashboadLayout.editNameLayout && <UpdateNameForm name={name} email={email} methods={{ homeLayout, setName, errorLayout }} />}
-                {dashboadLayout.editPasswdLayout && <UpdatePasswdForm email={email} methods={{ homeLayout, errorLayout }} />}
-                {dashboadLayout.addCriptoRegisterLayout && <AddCriptoRegisterForm userId={userId} methods={{ homeLayout, updateCriptoRegisterList, errorLayout }} />}
-                {!dashboadLayout.editNameLayout &&
-                    !dashboadLayout.editPasswdLayout &&
-                    !dashboadLayout.addCriptoRegisterLayout &&
-                    <Home userId={userId} criptoRegisters={criptoRegisters} methods={{ updateCriptoRegisterList, errorLayout }}/>
-                }
+                    {dashboadLayout.editNameLayout && <UpdateNameForm name={name} email={email} methods={{ homeLayout, setName, errorLayout }} />}
+                    {dashboadLayout.editPasswdLayout && <UpdatePasswdForm email={email} methods={{ homeLayout, errorLayout }} />}
+                    {dashboadLayout.addCriptoRegisterLayout && <AddCriptoRegisterForm userId={userId} methods={{ homeLayout, updateCriptoRegisterList, errorLayout }} />}
+                    {!dashboadLayout.editNameLayout &&
+                        !dashboadLayout.editPasswdLayout &&
+                        !dashboadLayout.addCriptoRegisterLayout &&
+                        <Home userId={userId} criptoRegisters={criptoRegisters} methods={{ updateCriptoRegisterList, errorLayout }}/>
+                    }
 
-            </div>
+                </div>
+            </>
     )
 };
 

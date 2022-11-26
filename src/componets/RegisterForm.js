@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { fetchData } from '../utils/utils';
+import FormHeader from './FormHeader.js';
+import '../css/Forms.css';
 
 
 const RegisterForm = (props) => {
@@ -36,26 +38,29 @@ const RegisterForm = (props) => {
     }
 
     return (
-        <form onSubmit={e => register(e)}>
-            <label>
-                Nome:
-                <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
-            </label>
-            <label>
-                Email:
-                <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
-            </label>
-            <label>
-                Senha:
-                <input type="password" name="passwd" value={passwd} onChange={e => setPasswd(e.target.value)} />
-            </label>
-            <label>
-                Confirmar senha:
-                <input type="password" name="confirPasswd" value={confirmPasswd} onChange={e => setConfirmPasswd(e.target.value)} />
-            </label>
-            <input type="submit" value="Registrar" />
-            <div> <span onClick={e => props.methods.setLoginLayout()}> Ir </span> para tela de login</div>
-        </form>
+        <div className="form-container">
+            <FormHeader/>
+            <form onSubmit={e => register(e)}>
+                <label>
+                    Nome:
+                    <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
+                </label>
+                <label>
+                    Email:
+                    <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
+                </label>
+                <label>
+                    Senha:
+                    <input type="password" name="passwd" value={passwd} onChange={e => setPasswd(e.target.value)} />
+                </label>
+                <label>
+                    Confirmar senha:
+                    <input type="password" name="confirPasswd" value={confirmPasswd} onChange={e => setConfirmPasswd(e.target.value)} />
+                </label>
+                <input className="btn" type="submit" value="Registrar" />
+                <div> Já tem conta? <span className="link" onClick={e => props.methods.setLoginLayout()}> Volte </span> para tela de login!</div>
+            </form>
+        </div>
     )
 }
 

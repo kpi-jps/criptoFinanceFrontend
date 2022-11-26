@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+input, textarea, select{
+  width: 100%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.link:hover {
+  color: #61dafb;
+  cursor: default;
+}
+
+.link {
+  color: lightseagreen;
+  cursor: default;
+}
