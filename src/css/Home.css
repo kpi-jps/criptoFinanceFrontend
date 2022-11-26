@@ -1,0 +1,11 @@
+#cripto-items {
+    padding: 0;
+    list-style-type: none;
+}
+
+#cripto-items li {
+    border-radius: 15px;
+    background-color: rgb(253, 253, 212);
+    padding: 10px;
+    margin: 8px 0;
+}

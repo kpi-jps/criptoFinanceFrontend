@@ -1,7 +1,7 @@
 import'../css/DashboardHeader.css'
 const DashboardHeader = () => {
     return (
-        <header>
+        <header className="dashboard-header">
             $$ CriptoFinance $$
         </header>
     );

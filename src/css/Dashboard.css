@@ -1,0 +1,29 @@
+#ctrls ul {
+    list-style-type: none;
+}
+#right-ctrls {
+    float: right;
+}
+#left-ctrls {
+    float: left;
+}
+#ctrls li {
+    display: inline;
+    padding: 10px;
+    cursor: default;
+}
+#user-info {
+    background-color: rgb(243, 235, 235);
+    border: 1px solid lightgrey;
+    padding: 10px 50px;
+    clear: both;
+}
+
+#dashboard-container {
+    width: 70%;
+    margin: 20px auto;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 20px;
+
+}

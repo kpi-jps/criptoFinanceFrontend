@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchData } from '../utils/utils'
+import '../css/CriptoRegisterItem.css'
 const CriptoRegisterItem = (props) => {
     const userId = props.userId;
     const id = props.itemInfo.id;
@@ -47,6 +48,7 @@ const CriptoRegisterItem = (props) => {
                 }
                 if (response.status === 401) {
                     alert(response.data.msg);
+                    window.location.reload();
                     return
                 }
                 props.methods.updateCriptoRegisterList();
@@ -74,11 +76,14 @@ const CriptoRegisterItem = (props) => {
     return (
         <>
             <p>
-                id: {id} Ticker: {ticker.toUpperCase()} -
-                Quantidade: {quantity} -
-                Valor (USD) = {(values.usdValue * quantity).toFixed(2)}
+                <b>ID:</b> {id} <b>Ticker:</b> {ticker.toUpperCase()} - 
+                <b> Quantidade:</b> {quantity}  - 
+                <b> Valor (USD) = </b> {(values.usdValue * quantity).toFixed(2)}
             </p>
-            <p><button onClick={e => del(id)}>Deletar</button> <button onClick={e => setUpdate(!update)}>Editar</button></p>
+            <ul className="item-ctrls">
+                <li className="link" onClick={e => del(id)}>Deletar</li> 
+                <li className="link" onClick={e => setUpdate(!update)}>Editar</li>
+            </ul>
             {update &&
                 <form onSubmit={e => edit(e)}>
                     <label>

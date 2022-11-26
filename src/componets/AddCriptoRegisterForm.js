@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { fetchData } from '../utils/utils'
+import '../css/AddCriptoRegisterForm.css'
 
 const AddCriptoRegisterForm = (props) => {
     const userId = props.userId;
@@ -57,6 +58,7 @@ const AddCriptoRegisterForm = (props) => {
                 }
                 if (response.status === 401) {
                     alert(response.data.msg);
+                    window.location.reload();
                     return
                 }
                 
@@ -78,13 +80,14 @@ const AddCriptoRegisterForm = (props) => {
             </form>
         </div> : 
         <div>
+            <div className="link" onClick={e => cancel()}>Cancelar</div>
+            <div id="ticker-selected"> <b>Ticker selecionado: </b> {ticker.toUpperCase()} </div>
             <form onSubmit={e => save(e)}>
-                <div>Ticker: {ticker} </div>
+                
                 <label>
                     Quantidade:
                     <input type="text" name="quantity" value={quantity} onChange={e => setQuantity(e.target.value)}/>
                 </label>
-                <button onClick={e => cancel()}>Cancelar</button>
                 <input type="submit" value="Salvar" />
             </form>
         </div>

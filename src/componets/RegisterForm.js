@@ -28,6 +28,7 @@ const RegisterForm = (props) => {
                 }
                 if(response.status === 401) {
                     alert(response.data.msg);
+                    window.location.reload();
                     return
                 }
                 //console.log(response);

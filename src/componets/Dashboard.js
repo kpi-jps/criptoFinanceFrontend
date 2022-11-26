@@ -6,6 +6,7 @@ import UpdatePasswdForm from './UpdatePasswdForm'
 import AddCriptoRegisterForm from './AddCriptoRegisterForm'
 import ErroPage from './ErrorPage.js'
 import Home from './Home.js'
+import '../css/Dashboard.css'
 
 const Dashboard = (props) => {
     const userId = props.userInfo.userId;
@@ -91,6 +92,7 @@ const Dashboard = (props) => {
                 }
                 if (response.status === 401) {
                     alert(response.data.msg);
+                    window.location.reload();
                     return
                 }
                 setCriptoRegisters(response.data);
@@ -116,16 +118,19 @@ const Dashboard = (props) => {
         dashboadLayout.errorLayout ? <ErroPage content={'content'} /> :
             <>
                 <DashboardHeader/>
-                <div className="dashboard-container">
-                    <div id="header"> Usuário #{userId} Email : {email} - Nome: {name}</div>
-                    <ul id="ctrls">
-                        <li onClick={e => homeLayout()}>Home</li>
-                        <li onClick={e => editNameLayout()}>Editar nome do usuário</li>
-                        <li onClick={e => editPasswdLayout()}>Editar senha do usuário </li>
-                        <li onClick={e => addCriptoRegisterLayout()}>Adicionar cripto registro</li>
-                        <li onClick={e => logout()}>Sair</li>
+                <nav id="ctrls">
+                    <ul id="left-ctrls">
+                        <li className="link" onClick={e => homeLayout()}>Home</li>
+                        <li className="link" onClick={e => editNameLayout()}>Editar nome do usuário</li>
+                        <li className="link" onClick={e => editPasswdLayout()}>Editar senha do usuário </li>
+                        <li className="link" onClick={e => addCriptoRegisterLayout()}>Adicionar cripto registro</li>
                     </ul>
-
+                    <ul id="right-ctrls">    
+                        <li className="link" onClick={e => logout()}>Sair</li>
+                    </ul>
+                </nav>
+                <div id="user-info"> <b>Usuário #{userId}</b> - <b>Email :</b> {email} - <b>Nome:</b> {name}</div>
+                <div id="dashboard-container">
                     {dashboadLayout.editNameLayout && <UpdateNameForm name={name} email={email} methods={{ homeLayout, setName, errorLayout }} />}
                     {dashboadLayout.editPasswdLayout && <UpdatePasswdForm email={email} methods={{ homeLayout, errorLayout }} />}
                     {dashboadLayout.addCriptoRegisterLayout && <AddCriptoRegisterForm userId={userId} methods={{ homeLayout, updateCriptoRegisterList, errorLayout }} />}
