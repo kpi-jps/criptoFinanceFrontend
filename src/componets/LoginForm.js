@@ -3,8 +3,6 @@ import { fetchData } from '../utils/utils.js';
 import FormHeader from './FormHeader.js';
 import '../css/Forms.css';
 
-
-
 const LoginForm = (props) => {
     const [email, setEmail] = useState('');
     const [passwd, setPasswd] = useState('');
@@ -13,6 +11,7 @@ const LoginForm = (props) => {
         fetchData('/user/login', 'POST', {email : email, passwd : passwd})
         .then((response) => {
             if(response.error) {
+                console.log(response.error);
                 props.methods.setErrorLayout();
                 return;
             }

@@ -1,17 +1,18 @@
 
 import { useState, useEffect } from 'react';
-import ErrorPage from './componets/ErrorPage.js'
-import LoginForm from './componets/LoginForm.js';
-import RegisterForm from './componets/RegisterForm';
-import Dashboard from './componets/Dashboard';
+import ErrorPage from './ErrorPage.js'
+import LoginForm from './LoginForm.js';
+import RegisterForm from './RegisterForm';
+import Dashboard from './Dashboard';
 
-import { fetchData } from './utils/utils.js'
+import { fetchData } from '../utils/utils.js'
 
 
 function App() {
 
 
   const [layout, setLayout] = useState({ loginLayout: true, registerLayout: false, errorLayout: false });
+  const [errorInfo, setErrorInfo] = useState({});
   const [userInfo, setUserInfo] = useState({});
 
 
@@ -53,10 +54,10 @@ function App() {
 
 
 
-  if (layout.errorLayout) return <main><ErrorPage /></main>
-  if (layout.loginLayout) return <main> <LoginForm methods={{setRegisterLayout, setErrorLayout, setDashboardLayout, setUserInfo}} /> </main>
-  if (layout.registerLayout) return <main> <RegisterForm methods={{setErrorLayout, setLoginLayout}} /> </main>
-  return <main> <Dashboard userInfo={userInfo} methods={{setErrorLayout, setLoginLayout}} /> </main>
+  if (layout.errorLayout) return <main><ErrorPage/></main>
+  if (layout.loginLayout) return <main> <LoginForm methods={{setRegisterLayout, setErrorLayout, setErrorInfo, setDashboardLayout, setUserInfo}} /> </main>
+  if (layout.registerLayout) return <main> <RegisterForm methods={{setErrorLayout, setErrorInfo, setLoginLayout}} /> </main>
+  return <main> <Dashboard userInfo={userInfo} methods={{setErrorLayout, setErrorInfo, setLoginLayout}} /> </main>
 
 }
 

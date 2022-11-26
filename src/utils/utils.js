@@ -19,7 +19,10 @@ const fetchData = async (url, method, bodyObj) => {
         const json = await res.json()
         return {error: false, status:res.status, data:json};
     } catch (error) {
-        return {error: true};
+        return {
+            error: true,
+            errorInfo: error
+        };
     }
     
 }
